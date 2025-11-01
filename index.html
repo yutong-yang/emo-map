@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindscape - Your Inner World on the Map</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Framer Motion -->
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@11/dist/framer-motion.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .watercolor-bg {
+            background: linear-gradient(
+                135deg,
+                rgba(247, 246, 242, 0.95) 0%,
+                rgba(255, 240, 245, 0.3) 25%,
+                rgba(240, 248, 255, 0.3) 50%,
+                rgba(245, 255, 245, 0.3) 75%,
+                rgba(247, 246, 242, 0.95) 100%
+            );
+        }
+        
+        .watercolor-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05),
+                        0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .watercolor-circle {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(176, 224, 230, 0.3));
+            border-radius: 50%;
+        }
+        
+        .map-texture {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(176, 224, 230, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 228, 181, 0.1) 0%, transparent 50%);
+            background-size: 100% 100%, 100% 100%, 100% 100%;
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1),
+                        0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #9F7AEA, #667EEA, #F093FB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pastel-accent {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.2), rgba(176, 224, 230, 0.2));
+        }
+        
+        input, textarea {
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#f7f6f2] text-gray-700">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 watercolor-bg backdrop-blur-md border-b border-white/50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold gradient-text">Mindscape</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#hero" class="text-gray-700 hover:text-purple-500 transition-colors">Home</a>
+                    <a href="#how" class="text-gray-700 hover:text-purple-500 transition-colors">How It Works</a>
+                    <a href="#stories" class="text-gray-700 hover:text-purple-500 transition-colors">Vision</a>
+                    <a href="#contact" class="text-gray-700 hover:text-purple-500 transition-colors">Connect</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 map-texture">
+        <div class="container mx-auto px-6 py-20">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left: Text Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">
+                        Mindscape
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl text-gray-600 font-light mb-8">
+                        Your Inner World on the Map
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        An emotion map where places hold feelings. Record moments through emojis, photos, colors, and words—each memory becomes a visual point on your personal map.
+                    </p>
+                </div>
+                
+                <!-- Right: Product Mockups -->
+                <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="watercolor-card rounded-3xl p-6 hover-lift overflow-hidden">
+                        <img src="image/record.png" alt="Emotion Map" class="w-full h-auto rounded-2xl">
+                    </div>
+                    <div class="watercolor-card rounded-3xl p-6 hover-lift overflow-hidden">
+                        <img src="image/psychological.jpg" alt="Record Interface" class="w-full h-auto rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how" class="py-20 watercolor-bg">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">
+                How It Works
+            </h2>
+            <p class="text-center text-gray-600 text-xl mb-16 max-w-3xl mx-auto">
+                Ways to explore and organize your emotional geography
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1: Record -->
+                <div class="watercolor-card rounded-3xl p-8 hover-lift">
+                    <div class="w-20 h-20 pastel-accent rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 gradient-text">Record</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">
+                        Capture emotional moments where they happen through diverse ways.
+                    </p>
+                </div>
+                
+                <!-- Feature 2: Visualize -->
+                <div class="watercolor-card rounded-3xl p-8 hover-lift">
+                    <div class="w-20 h-20 pastel-accent rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-10 h-10 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 gradient-text">Visualize</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">
+                        Watch your emotion map emerge. Rearrange and organize records to reveal patterns in your emotional landscape.
+                    </p>
+                </div>
+                
+                <!-- Feature 3: Reflect -->
+                <div class="watercolor-card rounded-3xl p-8 hover-lift">
+                    <div class="w-20 h-20 pastel-accent rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-center mb-4 gradient-text">Reflect</h3>
+                    <p class="text-gray-700 text-center leading-relaxed">
+                        Discover beauty in small details of life as you explore the chemistry between you and place.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stories Section -->
+    <section id="stories" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">
+                Vision
+            </h2>
+            <p class="text-center text-gray-600 text-xl mb-16 max-w-3xl mx-auto">
+                Imagine discovering yourself through emotional geography
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Story 1 -->
+                <div class="watercolor-card rounded-3xl p-8 hover-lift">
+                    <div class="w-16 h-16 pastel-accent rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center gradient-text">Clusters of Peace</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Each morning, record how you feel in that corner café. Week by week, your map fills with moments. Then you see it: clusters of calm forming around your favorite neighborhood. The pattern was always there—waiting to be noticed.
+                    </p>
+                </div>
+                
+                <!-- Story 2 -->
+                <div class="watercolor-card rounded-3xl p-8 hover-lift">
+                    <div class="w-16 h-16 pastel-accent rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center gradient-text">Layers of Meaning</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Return to Paris after Turin. Your map whispers: "Why did I feel so different here?" You rediscover that past version of yourself, then return to feel it again. Each visit layers meaning onto place.
+                    </p>
+                </div>
+                
+                <!-- Story 3 -->
+                <div class="watercolor-card rounded-3xl p-8 hover-lift">
+                    <div class="w-16 h-16 pastel-accent rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-center gradient-text">City, Refracted</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        You and a friend arrive in the same city. They wander through cozy neighborhoods while you explore the arts district. Two cities emerge from one. Your map reveals how place is always personal—shaped by where you go, who you meet, what you seek.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">
+                Our Team
+            </h2>
+            <!-- <p class="text-center text-gray-600 text-xl mb-16 max-w-3xl mx-auto">
+                Blending art, psychology, and technology to build living emotional landscapes
+            </p> -->
+            
+            <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <!-- Team Member 1 -->
+                <div class="watercolor-card rounded-3xl p-6 hover-lift flex flex-col items-center">
+                    <div class="w-32 h-32 watercolor-circle mb-4 flex items-center justify-center">
+                        <div class="w-28 h-28 bg-gradient-to-br from-pink-200 to-rose-300 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                            YG
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Yuhan Guo</h3>
+                    <p class="text-gray-600 text-sm text-center">yuhan.guo@pku.edu.cn</p>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="watercolor-card rounded-3xl p-6 hover-lift flex flex-col items-center">
+                    <div class="w-32 h-32 watercolor-circle mb-4 flex items-center justify-center">
+                        <div class="w-28 h-28 bg-gradient-to-br from-blue-200 to-cyan-300 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                            XL
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Xingyou Liu</h3>
+                    <p class="text-gray-600 text-sm text-center">liuxingyou666@outlook.com</p>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="watercolor-card rounded-3xl p-6 hover-lift flex flex-col items-center">
+                    <div class="w-32 h-32 watercolor-circle mb-4 flex items-center justify-center">
+                        <div class="w-28 h-28 bg-gradient-to-br from-purple-200 to-indigo-300 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                            YY
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Yutong Yang</h3>
+                    <p class="text-gray-600 text-sm text-center">flora20@sjtu.edu.cn</p>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="watercolor-card rounded-3xl p-6 hover-lift flex flex-col items-center">
+                    <div class="w-32 h-32 watercolor-circle mb-4 flex items-center justify-center">
+                        <div class="w-28 h-28 bg-gradient-to-br from-green-200 to-emerald-300 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                            KX
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Kai Xu</h3>
+                    <p class="text-gray-600 text-sm text-center">kai.xu@nottingham.ac.uk</p>
+                </div>
+                
+                <!-- Team Member 5 -->
+                <div class="watercolor-card rounded-3xl p-6 hover-lift flex flex-col items-center">
+                    <div class="w-32 h-32 watercolor-circle mb-4 flex items-center justify-center">
+                        <div class="w-28 h-28 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+                            XL
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Xingyu Lan</h3>
+                    <p class="text-gray-600 text-sm text-center">xingyulan96@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 watercolor-bg">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-4 gradient-text">
+                Connect with Us
+            </h2>
+            <p class="text-center text-gray-600 text-xl mb-12 max-w-3xl mx-auto">
+                Join us in exploring the poetic intersections of emotion, memory, and place. Share your journey.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Discord QR Code -->
+                <div class="watercolor-card rounded-3xl p-8 flex flex-col items-center justify-center text-center">
+                    <h3 class="text-2xl font-bold mb-2 gradient-text">Join us on Discord</h3>
+                    <a href="https://discord.gg/avMBrvk8" target="_blank" class="inline-block hover-lift mb-4">
+                        <img src="image/discordgroup.svg" alt="Join Discord Community" class="w-48 h-48 mx-auto rounded-2xl shadow-lg">
+                    </a>
+                    <p class="text-gray-500 text-sm">Scan or click to join</p>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="watercolor-card rounded-3xl p-8">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2 font-medium">Name</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-400 focus:bg-white transition-all"
+                                placeholder="Your name"
+                            >
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2 font-medium">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-400 focus:bg-white transition-all"
+                                placeholder="your.email@example.com"
+                            >
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 mb-2 font-medium">Subject</label>
+                            <input 
+                                type="text" 
+                                id="subject" 
+                                name="subject" 
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-400 focus:bg-white transition-all"
+                                placeholder="What would you like to discuss?"
+                            >
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2 font-medium">Message</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="4"
+                                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-purple-400 focus:bg-white transition-all resize-none"
+                                placeholder="Share your thoughts..."
+                            ></textarea>
+                        </div>
+                        <button 
+                            type="submit"
+                            class="w-full px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:from-purple-600 hover:to-pink-600 transition-all shadow-lg hover:shadow-xl"
+                        >
+                            Redirect to Email
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-200 pastel-accent">
+        <div class="container mx-auto px-6 text-center">
+            <div class="text-gray-600">
+                © 2025 Mindscape. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scrolling -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission via email
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const name = form.name.value;
+            const email = form.email.value;
+            const subject = form.subject.value;
+            const message = form.message.value;
+            
+            const mailtoLink = `mailto:flora20@sjtu.edu.cn?subject=${encodeURIComponent(subject || 'Contact from Mindscape')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
+
+</body>
+</html>
+
